@@ -512,6 +512,12 @@ export interface PluginContentReleasesRelease extends Schema.CollectionType {
   attributes: {
     name: Attribute.String & Attribute.Required;
     releasedAt: Attribute.DateTime;
+    scheduledAt: Attribute.DateTime;
+    timezone: Attribute.String;
+    status: Attribute.Enumeration<
+      ['ready', 'blocked', 'failed', 'done', 'empty']
+    > &
+      Attribute.Required;
     actions: Attribute.Relation<
       'plugin::content-releases.release',
       'oneToMany',
@@ -566,6 +572,7 @@ export interface PluginContentReleasesReleaseAction
       'manyToOne',
       'plugin::content-releases.release'
     >;
+    isEntryValid: Attribute.Boolean;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -838,11 +845,6 @@ export interface ApiArticleArticle extends Schema.CollectionType {
       'manyToOne',
       'api::author.author'
     >;
-    category: Attribute.Relation<
-      'api::article.article',
-      'manyToOne',
-      'api::category.category'
-    >;
     blocks: Attribute.DynamicZone<
       ['shared.media', 'shared.quote', 'shared.rich-text', 'shared.slider']
     >;
@@ -906,21 +908,21 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   info: {
     singularName: 'category';
     pluralName: 'categories';
-    displayName: 'Category';
+    displayName: 'Kateg\u00F3ria';
     description: 'Organize your content into categories';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
-    name: Attribute.String;
-    slug: Attribute.UID;
-    articles: Attribute.Relation<
+    icon: Attribute.Media;
+    title: Attribute.String;
+    subtitle: Attribute.String;
+    recipes: Attribute.Relation<
       'api::category.category',
-      'oneToMany',
-      'api::article.article'
+      'manyToMany',
+      'api::recipe.recipe'
     >;
-    description: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -971,6 +973,48 @@ export interface ApiGlobalGlobal extends Schema.SingleType {
   };
 }
 
+export interface ApiRecipeRecipe extends Schema.CollectionType {
+  collectionName: 'recipes';
+  info: {
+    singularName: 'recipe';
+    pluralName: 'recipes';
+    displayName: 'Recept';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    logo: Attribute.Media;
+    title: Attribute.String;
+    portions: Attribute.Integer;
+    time: Attribute.Integer;
+    process: Attribute.Text;
+    photos: Attribute.Media;
+    videoUrl: Attribute.Media;
+    categories: Attribute.Relation<
+      'api::recipe.recipe',
+      'manyToMany',
+      'api::category.category'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::recipe.recipe',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::recipe.recipe',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -994,6 +1038,7 @@ declare module '@strapi/types' {
       'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
+      'api::recipe.recipe': ApiRecipeRecipe;
     }
   }
 }

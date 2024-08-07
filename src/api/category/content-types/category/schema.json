@@ -4,7 +4,7 @@
   "info": {
     "singularName": "category",
     "pluralName": "categories",
-    "displayName": "Category",
+    "displayName": "Kategória",
     "description": "Organize your content into categories"
   },
   "options": {
@@ -12,20 +12,25 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "title": {
       "type": "string"
     },
-    "slug": {
-      "type": "uid"
+    "subtitle": {
+      "type": "string"
     },
-    "articles": {
+    "recipes": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::article.article",
-      "mappedBy": "category"
-    },
-    "description": {
-      "type": "text"
+      "relation": "manyToMany",
+      "target": "api::recipe.recipe",
+      "mappedBy": "categories"
     }
   }
 }
