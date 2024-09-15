@@ -53,6 +53,14 @@
       "relation": "manyToMany",
       "target": "api::category.category",
       "inversedBy": "recipes"
+    },
+    "isNew": {
+      "type": "boolean",
+      "default": false
+    },
+    "isTop": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
