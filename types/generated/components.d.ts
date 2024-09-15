@@ -1,5 +1,28 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface SharedIngredient extends Schema.Component {
+  collectionName: 'components_shared_ingredients';
+  info: {
+    displayName: 'ingredient';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    materials: Attribute.Component<'shared.material', true>;
+  };
+}
+
+export interface SharedMaterial extends Schema.Component {
+  collectionName: 'components_shared_materials';
+  info: {
+    displayName: 'material';
+    description: '';
+  };
+  attributes: {
+    text: Attribute.String;
+  };
+}
+
 export interface SharedMedia extends Schema.Component {
   collectionName: 'components_shared_media';
   info: {
@@ -65,6 +88,8 @@ export interface SharedSlider extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'shared.ingredient': SharedIngredient;
+      'shared.material': SharedMaterial;
       'shared.media': SharedMedia;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;

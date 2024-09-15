@@ -61,6 +61,12 @@
     "isTop": {
       "type": "boolean",
       "default": false
+    },
+    "ingredients": {
+      "displayName": "ingredient",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.ingredient"
     }
   }
 }

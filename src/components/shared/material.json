@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_shared_materials",
+  "info": {
+    "displayName": "material",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    }
+  }
+}

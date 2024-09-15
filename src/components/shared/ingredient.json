@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_ingredients",
+  "info": {
+    "displayName": "ingredient",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "materials": {
+      "displayName": "material",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.material"
+    }
+  }
+}
