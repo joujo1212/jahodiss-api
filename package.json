@@ -15,10 +15,10 @@
     "strapi-plugin-import-export-entries": "^1.23.1",
     "styled-components": "5.3.3"
   },
-  "name": "my-app-name",
+  "name": "jahodiss-api",
   "private": true,
   "version": "0.1.0",
-  "description": "A Strapi application",
+  "description": "Jahodiss Strapi API app",
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
@@ -26,7 +26,7 @@
     "strapi": "strapi"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "Jozef Orenic"
   },
   "strapi": {
     "template": "blog"
